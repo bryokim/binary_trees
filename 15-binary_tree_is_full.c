@@ -25,7 +25,6 @@ int binary_tree_is_full(const binary_tree_t *tree)
 		left_leaves = binary_tree_is_full(tree->left);
 		if (!left_leaves && tree->left)
 			return (0);
-		printf("Brian\n");
 
 		right_leaves = binary_tree_is_full(tree->right);
 
