@@ -2,6 +2,7 @@
 
 size_t max_depth(const binary_tree_t *tree);
 int check_is_full(const binary_tree_t *tree);
+int check_depth(const binary_tree_t *tree);
 
 /**
  * binary_tree_is_perfect - Checks if a binary tree is perfect.
@@ -19,10 +20,41 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	else
 	{
 		return (check_is_full(tree) &&
-			(max_depth(tree->left) == max_depth(tree->right)));
+			check_depth(tree));
 	}
 }
 
+/**
+ * check_depth - Checks the depth of all the subtrees.
+ *
+ * @tree: Pointer to the root node of the binary tree.
+ *
+ * Return: 1 if all depths are equal, 0 if otherwise.
+ */
+int check_depth(const binary_tree_t *tree)
+{
+	int depth;
+
+	if (!tree || (!tree->left && !tree->right))
+	{
+		return (1);
+	}
+	else if ((tree->left && !tree->right) || (!tree->left && tree->right))
+	{
+		return (0);
+	}
+	else
+	{
+		depth = (max_depth(tree->left) == max_depth(tree->right));
+		if (!depth)
+			return (0);
+		if (!check_depth(tree->left))
+			return (0);
+		if (!check_depth(tree->right))
+			return (0);
+		return (1);
+	}
+}
 /**
  * max_depth - Find the max depth of a binary tree.
  *

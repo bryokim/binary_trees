@@ -15,6 +15,9 @@ const binary_tree_t *second)
 {
 	size_t first_depth, second_depth;
 
+	if (!first || !second)
+		return (NULL);
+
 	first_depth = binary_tree_depth(first);
 	second_depth = binary_tree_depth(second);
 
